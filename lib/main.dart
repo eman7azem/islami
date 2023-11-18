@@ -39,8 +39,8 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
-        Locale('en'), // English
-        Locale('ar'), // Spanish
+        Locale('en'),
+        Locale('ar'),
       ],
       initialRoute: HomeScreen.route,
       routes: {
