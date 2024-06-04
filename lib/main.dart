@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:islami/providers/my_provider.dart';
+import 'package:islami/splash/splash.dart';
 import 'package:islami/sura_details.dart';
 import 'package:provider/provider.dart';
 
@@ -42,8 +43,9 @@ class MyApp extends StatelessWidget {
         Locale('en'),
         Locale('ar'),
       ],
-      initialRoute: HomeScreen.route,
+      initialRoute: SplashScreen.routeName,
       routes: {
+        SplashScreen.routeName: (context) => SplashScreen(),
         HomeScreen.route: (context) => HomeScreen(),
         SuraDetails.route: (context) => SuraDetails(),
         AhadeethDetails.route: (context) => AhadeethDetails(),

@@ -44,7 +44,7 @@ class ModeBottomSheet extends StatelessWidget {
           InkWell(
             onTap: () {
               provider.changeMode(ThemeMode.dark);
-              Navigator.pop(context);
+              // Navigator.pop(context);
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,7 +59,7 @@ class ModeBottomSheet extends StatelessWidget {
                 provider.theme == ThemeMode.dark
                     ? const Icon(
                         Icons.done,
-                        color: MyThemeData.primaryColor,
+                        color: MyThemeData.yellowColor,
                         size: 30,
                       )
                     : const SizedBox.shrink()

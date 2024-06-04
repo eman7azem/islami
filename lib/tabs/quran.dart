@@ -1,11 +1,19 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../sura_details.dart';
 import '../sura_model.dart';
 
+class QuranTab extends StatefulWidget {
+  QuranTab({super.key});
 
-class QuranTab extends StatelessWidget {
+  @override
+  State<QuranTab> createState() => _QuranTabState();
+}
+
+class _QuranTabState extends State<QuranTab> {
   final List<String> suraNames = [
     "الفاتحه",
     "البقرة",
@@ -123,7 +131,13 @@ class QuranTab extends StatelessWidget {
     "الناس"
   ];
 
-  QuranTab({super.key});
+  Map<int, int> verseCounts = {};
+
+  @override
+  void initState() {
+    super.initState();
+    countVersesInAssets();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,12 +150,24 @@ class QuranTab extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
             endIndent: 2,
           ),
-          Text(
-            AppLocalizations.of(context)!.suraName,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: Theme.of(context).colorScheme.secondary),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.suraName,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: Theme.of(context).colorScheme.secondary),
+              ),
+              Text(
+                AppLocalizations.of(context)!.numberVerses,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: Theme.of(context).colorScheme.secondary),
+              ),
+            ],
           ),
           Divider(
             thickness: 2,
@@ -160,11 +186,21 @@ class QuranTab extends StatelessWidget {
                     Navigator.pushNamed(context, SuraDetails.route,
                         arguments: SuraModel(suraNames[index], index));
                   },
-                  child: Text(
-                    suraNames[index],
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.secondary),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        suraNames[index],
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary),
+                      ),
+                      Text(
+                        '${verseCounts[index + 1] ?? 0}',
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary),
+                      ),
+                    ],
                   ),
                 );
               },
@@ -174,5 +210,25 @@ class QuranTab extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> countVersesInAssets() async {
+    int numberOfFiles = 114; // Change this to the number of files you have
+    Map<int, int> counts = {};
+
+    for (int i = 1; i <= numberOfFiles; i++) {
+      String fileName = 'assets/files/$i.txt';
+      try {
+        String content = await rootBundle.loadString(fileName);
+        int lineCount = LineSplitter.split(content).length;
+        counts[i] = lineCount;
+      } catch (e) {
+        print('Error reading $fileName: $e');
+      }
+    }
+
+    setState(() {
+      verseCounts = counts;
+    });
   }
 }

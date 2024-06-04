@@ -11,5 +11,6 @@
   "language": "Language",
   "mode": "Mode",
   "light": "Light Mode",
-  "dark": "Dark Mode"
+  "dark": "Dark Mode",
+  "numberVerses": "Number of verses"
 }

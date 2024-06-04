@@ -6,7 +6,7 @@ class MyThemeData {
       colorScheme: const ColorScheme(
         primary: primaryColor,
         secondary: Colors.black,
-        onPrimary: Colors.white,
+        onPrimary: Colors.black54,
         onSecondary: Colors.black,
         background: primaryColor,
 
@@ -50,7 +50,7 @@ class MyThemeData {
       colorScheme: const ColorScheme(
         primary: darkPrimaryColor,
         secondary: yellowColor,
-        onPrimary: darkPrimaryColor,
+        onPrimary: Colors.white,
         onSecondary: Colors.white,
         background: yellowColor,
 

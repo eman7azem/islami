@@ -94,6 +94,7 @@ class _SettingsTabState extends State<SettingsTab> {
 
   void showThemingBottomSheet() {
     showModalBottomSheet(
+      // backgroundColor: Theme.of(context).colorScheme.onPrimary,
         shape: OutlineInputBorder(
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(18),

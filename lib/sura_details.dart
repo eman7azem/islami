@@ -58,6 +58,7 @@ class _SuraDetailsState extends State<SuraDetails> {
                   borderSide: BorderSide(
                       color: Theme.of(context).colorScheme.background)),
               child: ListView.separated(
+                padding: EdgeInsets.all(15),
                 separatorBuilder: (context, index) => Divider(
                   thickness: 1,
                   endIndent: 40,
@@ -70,7 +71,7 @@ class _SuraDetailsState extends State<SuraDetails> {
                       "${provider.verses[index]}(${index + 1})",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Theme.of(context).colorScheme.background),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                   );
                 },
